@@ -2,6 +2,10 @@
 {
     public class Player
     {
+        public bool IsInGame { get; set; }
+        public int CurrentChips { get; set; }
+        public int CurrentBet { get; set; }
+
         public bool Join(Game game)
         {
             if (IsInGame)
@@ -25,12 +29,14 @@
             return false;
         }
 
-        public bool IsInGame { get; set; }
-        public int CurrentChips { get; set; }
-
         public void BuyChips(int chipsAmount)
         {
             CurrentChips = chipsAmount;
+        }
+
+        public void Bet(int chipsAmount)
+        {
+            CurrentBet = chipsAmount;
         }
     }
 }
