@@ -7,6 +7,11 @@
             IsInGame = true;
         }
 
+        public void Leave()
+        {
+            IsInGame = false;
+        }
+
         public bool? IsInGame { get; set; }
     }
 }

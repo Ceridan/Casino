@@ -15,5 +15,15 @@ namespace Casino.Tests
 
             Assert.IsTrue(player.IsInGame);
         }
+
+        [Test]
+        public void ShouldBeNotInGame_WhenLeaveGame()
+        {
+            var player = new Player();
+
+            player.Leave();
+
+            Assert.IsFalse(player.IsInGame);
+        }
     }
 }
