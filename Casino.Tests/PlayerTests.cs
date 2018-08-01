@@ -60,7 +60,7 @@ namespace Casino.Tests
         }
 
         [Test]
-        public void ShouldBeAbleToMakeBet_WhenInGame()
+        public void ShouldBeAbleToMakeBet()
         {
             var player = new Player();
 
