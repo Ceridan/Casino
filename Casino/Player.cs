@@ -2,9 +2,15 @@
 {
     public class Player
     {
-        public void Join(Game game)
+        public bool Join(Game game)
         {
+            if (IsInGame)
+            {
+                return false;
+            }
+
             IsInGame = true;
+            return true;
         }
 
         public bool Leave()

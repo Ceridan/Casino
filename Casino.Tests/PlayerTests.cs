@@ -31,10 +31,22 @@ namespace Casino.Tests
         {
             var player = new Player();
 
-            var isSuccesfullLeave = player.Leave();
+            var isSuccessfullLeave = player.Leave();
 
-            Assert.IsFalse(isSuccesfullLeave);
+            Assert.IsFalse(isSuccessfullLeave);
         }
 
+        [Test]
+        public void ShouldNotBeAbleToJoinGame_WhenInGame()
+        {
+            var player = new Player();
+            var game1 = new Game();
+            var game2 = new Game();
+
+            player.Join(game1);
+            var isSuccessfulSecondJoin = player.Join(game2);
+
+            Assert.IsFalse(isSuccessfulSecondJoin);
+        }
     }
 }
