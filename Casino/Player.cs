@@ -9,6 +9,7 @@
                 return false;
             }
 
+            game.AddPlayer(this);
             IsInGame = true;
             return true;
         }
