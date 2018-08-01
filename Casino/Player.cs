@@ -26,5 +26,11 @@
         }
 
         public bool IsInGame { get; set; }
+        public int CurrentChips { get; set; }
+
+        public void BuyChips(int chipsAmount)
+        {
+            CurrentChips = chipsAmount;
+        }
     }
 }

@@ -48,5 +48,15 @@ namespace Casino.Tests
 
             Assert.IsFalse(isSuccessfulSecondJoin);
         }
+
+        [Test]
+        public void ShouldBeAbleToBuyChips()
+        {
+            var player = new Player();
+
+            player.BuyChips(10);
+
+            Assert.AreEqual(10, player.CurrentChips);
+        }
     }
 }
