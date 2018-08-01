@@ -25,5 +25,16 @@ namespace Casino.Tests
 
             Assert.IsFalse(player.IsInGame);
         }
+
+        [Test]
+        public void ShouldNotBeAbleToLeaveGame_WhenNotInGame()
+        {
+            var player = new Player();
+
+            var isSuccesfullLeave = player.Leave();
+
+            Assert.IsFalse(isSuccesfullLeave);
+        }
+
     }
 }
