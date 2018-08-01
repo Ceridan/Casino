@@ -68,5 +68,16 @@ namespace Casino.Tests
 
             Assert.AreEqual(10, player.CurrentBet);
         }
+
+        [Test]
+        public void ShouldNotBeAbleToBet_WhenBetMoreChipsThenHave()
+        {
+            var player = new Player();
+
+            player.BuyChips(10);
+            var isSuccessfulBet = player.Bet(11);
+
+            Assert.IsFalse(isSuccessfulBet);
+        }
     }
 }

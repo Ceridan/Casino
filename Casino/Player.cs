@@ -34,9 +34,13 @@
             CurrentChips = chipsAmount;
         }
 
-        public void Bet(int chipsAmount)
+        public bool Bet(int chipsAmount)
         {
+            if (chipsAmount > CurrentChips)
+                return false;
+
             CurrentBet = chipsAmount;
+            return true;
         }
     }
 }
