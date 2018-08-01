@@ -1,10 +1,12 @@
-﻿namespace Casino
+﻿using System.Collections.Generic;
+
+namespace Casino
 {
     public class Player
     {
         public bool IsInGame { get; set; }
         public int CurrentChips { get; set; }
-        public int CurrentBet { get; set; }
+        public List<Bet> CurrentBets { get; } = new List<Bet>();
 
         public bool Join(Game game)
         {
@@ -34,12 +36,13 @@
             CurrentChips = chipsAmount;
         }
 
-        public bool Bet(int chipsAmount)
+        public bool Bet(int number, int chipsAmount)
         {
             if (chipsAmount > CurrentChips)
                 return false;
 
-            CurrentBet = chipsAmount;
+            CurrentBets.Add(new Bet { Number = number, ChipsAmount = chipsAmount });
+            CurrentChips -= chipsAmount;
             return true;
         }
     }

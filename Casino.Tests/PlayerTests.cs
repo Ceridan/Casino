@@ -64,9 +64,10 @@ namespace Casino.Tests
         {
             var player = new Player();
 
-            player.Bet(10);
+            player.BuyChips(10);
+            player.Bet(number: 5, chipsAmount: 10);
 
-            Assert.AreEqual(10, player.CurrentBet);
+            Assert.AreEqual(10, player.CurrentBets[0].ChipsAmount);
         }
 
         [Test]
@@ -75,9 +76,22 @@ namespace Casino.Tests
             var player = new Player();
 
             player.BuyChips(10);
-            var isSuccessfulBet = player.Bet(11);
+            var isSuccessfulBet = player.Bet(number: 5, chipsAmount: 11);
 
             Assert.IsFalse(isSuccessfulBet);
+        }
+
+        [Test]
+        public void ShouldBeAbleToBetSeveralTimesOnDifferentNumbers()
+        {
+            var player = new Player();
+
+            player.BuyChips(20);
+            player.Bet(number: 5, chipsAmount: 10);
+            player.Bet(number: 7, chipsAmount: 10);
+
+            Assert.AreEqual(5, player.CurrentBets[0].Number);
+            Assert.AreEqual(7, player.CurrentBets[1].Number);
         }
     }
 }
