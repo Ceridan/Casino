@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using Casino.Tests.DSL;
+using Moq;
 using NUnit.Framework;
 
 namespace Casino.Tests
@@ -134,13 +135,14 @@ namespace Casino.Tests
         [Test]
         public void ShouldLoseTheGame_WhenWrongBet()
         {
-            var player = new Player();
-            var dice = new Mock<IDice>();
-            dice.Setup(x => x.GetDiceDropNumber()).Returns(1);
-            var game = new Game(dice.Object);
-            player.BuyChips(100);
-            player.Join(game);
-            player.Bet(number: 2, chipsAmount: 10);
+            var game = Create.GameBuilder
+                .WithDiceWhichAlwaysDropsOne()
+                .Build();
+            var player = Create.PlayerBuilder
+                .WithChips(100)
+                .WithGame(game)
+                .WithBetOnNumber(2)
+                .Build();
 
             game.Play();
 
