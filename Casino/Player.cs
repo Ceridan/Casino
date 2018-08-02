@@ -38,6 +38,9 @@ namespace Casino
 
         public bool Bet(int number, int chipsAmount)
         {
+            if (number < 1 || number > 6)
+                return false;
+
             if (chipsAmount > CurrentChips)
                 return false;
 
