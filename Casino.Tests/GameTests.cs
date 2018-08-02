@@ -57,5 +57,13 @@ namespace Casino.Tests
 
             Assert.AreEqual(10, game.CasinoChips);
         }
+
+        [Test]
+        public void ShouldBeAbleToCreateGameWithTwoDices()
+        {
+            var game = new Game(numberOfDices: 2);
+
+            Assert.AreEqual(2, game.DiceCount);
+        }
     }
 }

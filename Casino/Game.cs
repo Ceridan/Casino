@@ -7,17 +7,20 @@ namespace Casino
         private readonly List<Player> _players = new List<Player>();
         private readonly IDice _dice;
 
-        public Game()
+        public Game(int numberOfDices = 1)
         {
             _dice = new Dice();
+            DiceCount = numberOfDices;
         }
 
-        public Game(IDice dice)
+        public Game(IDice dice, int numberOfDices = 1)
         {
             _dice = dice;
+            DiceCount = numberOfDices;
         }
 
         public int CasinoChips { get; set; }
+        public int DiceCount { get; }
 
         public List<Player> GetJoinedPlayers()
         {
