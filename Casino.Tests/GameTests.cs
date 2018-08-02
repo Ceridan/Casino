@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using Casino.Tests.DSL;
 using NUnit.Framework;
 
 namespace Casino.Tests
@@ -9,16 +10,12 @@ namespace Casino.Tests
         [Test]
         public void ShouldDeclineSeventhPlayer_WhenSixPlayersAlreadyJoined()
         {
-            var game = new Game();
-            var joinedPlayers = Enumerable.Range(0, 6).Select(s => new Player());
+            var game = Create.GameBuilder
+                .WithSixJoinedPlayers()
+                .Build();
             var declinedPlayer = new Player();
-
-            foreach (var player in joinedPlayers)
-            {
-                player.Join(game);
-            }
-
             declinedPlayer.Join(game);
+
             var playersCount = game.GetJoinedPlayers().Count;
 
             Assert.AreEqual(6, playersCount);
