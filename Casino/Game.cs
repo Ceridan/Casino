@@ -5,6 +5,17 @@ namespace Casino
     public class Game
     {
         private readonly List<Player> _players = new List<Player>();
+        private readonly IDice _dice;
+
+        public Game()
+        {
+            _dice = new Dice();
+        }
+
+        public Game(IDice dice)
+        {
+            _dice = dice;
+        }
 
         public List<Player> GetJoinedPlayers()
         {
@@ -20,6 +31,24 @@ namespace Casino
         public bool AcceptBet(int chipsAmount)
         {
             return chipsAmount % 5 == 0;
+        }
+
+        public void Play()
+        {
+            var luckyNumber = _dice.GetDiceDropNumber();
+
+            foreach (var player in _players)
+            {
+                foreach (var bet in player.CurrentBets)
+                {
+                    if (bet.Number == luckyNumber)
+                    {
+                        player.CurrentChips += bet.ChipsAmount * 6;
+                    }
+                }
+
+                player.CurrentBets.Clear();
+            }
         }
     }
 }

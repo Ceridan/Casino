@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
 
 namespace Casino.Tests
 {
@@ -128,6 +129,22 @@ namespace Casino.Tests
             Assert.IsFalse(isRejectedBet1);
             Assert.IsFalse(isRejectedBet2);
             Assert.IsFalse(isRejectedBet3);
+        }
+
+        [Test]
+        public void ShouldLoseTheGame_WhenWrongBet()
+        {
+            var player = new Player();
+            var dice = new Mock<IDice>();
+            dice.Setup(x => x.GetDiceDropNumber()).Returns(1);
+            var game = new Game(dice.Object);
+            player.BuyChips(100);
+            player.Join(game);
+            player.Bet(number: 2, chipsAmount: 10);
+
+            game.Play();
+
+            Assert.AreEqual(90, player.CurrentChips);
         }
     }
 }
