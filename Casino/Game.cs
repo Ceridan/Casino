@@ -1,9 +1,24 @@
 ﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace Casino
 {
     public class Game
     {
+        private static readonly Dictionary<int, int> _twoDicesWinningModifierStartegy = new Dictionary<int, int>
+        {
+            { 2, 36 },
+            { 3, 18 },
+            { 4, 12 },
+            { 5, 9 },
+            { 6, 7 },
+            { 7, 6 },
+            { 8, 7 },
+            { 9, 9 },
+            { 10, 12 },
+            { 11, 18 },
+            { 12, 36 },
+        };
         private readonly List<Player> _players = new List<Player>();
         private readonly IDice _dice;
 
@@ -48,7 +63,7 @@ namespace Casino
                 {
                     if (bet.Number == luckyNumber)
                     {
-                        player.CurrentChips += bet.ChipsAmount * 6;
+                        player.CurrentChips += bet.ChipsAmount * GetWinningModifier(luckyNumber);
                     }
                     else
                     {
@@ -58,6 +73,16 @@ namespace Casino
 
                 player.CurrentBets.Clear();
             }
+        }
+
+        public int GetWinningModifier(int winningNumber)
+        {
+            if (DiceCount == 2)
+            {
+                return _twoDicesWinningModifierStartegy[winningNumber];
+            }
+
+            return 6;
         }
     }
 }

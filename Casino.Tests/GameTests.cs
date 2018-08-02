@@ -65,5 +65,19 @@ namespace Casino.Tests
 
             Assert.AreEqual(2, game.DiceCount);
         }
+
+        [Test]
+        public void ShouldDecideWinningModifierBasedOnLuckyNumber_WhenGameWithTwoDices()
+        {
+            var game = new Game(numberOfDices: 2);
+
+            var modifierForNumber2 = game.GetWinningModifier(winningNumber: 2);
+            var modifierForNumber7 = game.GetWinningModifier(winningNumber: 7);
+            var modifierForNumber9 = game.GetWinningModifier(winningNumber: 9);
+
+            Assert.AreEqual(36, modifierForNumber2);
+            Assert.AreEqual(6, modifierForNumber7);
+            Assert.AreEqual(9, modifierForNumber9);
+        }
     }
 }
