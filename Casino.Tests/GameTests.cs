@@ -23,5 +23,17 @@ namespace Casino.Tests
 
             Assert.AreEqual(6, playersCount);
         }
+
+        [Test]
+        public void ShouldAcceptBetsOnlyDividedByFive()
+        {
+            var game = new Game();
+
+            var acceptedBet = game.AcceptBet(15);
+            var rejectedBet = game.AcceptBet(17);
+
+            Assert.IsTrue(acceptedBet);
+            Assert.IsFalse(rejectedBet);
+        }
     }
 }

@@ -16,5 +16,10 @@ namespace Casino
             if (_players.Count < 6)
                 _players.Add(player);
         }
+
+        public bool AcceptBet(int chipsAmount)
+        {
+            return chipsAmount % 5 == 0;
+        }
     }
 }
