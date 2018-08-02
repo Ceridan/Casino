@@ -17,17 +17,20 @@ namespace Casino
                 return false;
             }
 
-            game.AddPlayer(this);
-            diceCount = game.DiceCount;
-            IsInGame = true;
-            return true;
+            if (game.AddPlayer(this))
+            {
+                diceCount = game.DiceCount;
+                IsInGame = true;
+                return true;
+            }
+
+            return false;
         }
 
         public bool Leave(Game game)
         {
-            if (IsInGame)
+            if (IsInGame && game.RemovePlayer(this))
             {
-                game.RemovePlayer(this);
                 IsInGame = false;
                 return true;
             }

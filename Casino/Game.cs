@@ -42,16 +42,26 @@ namespace Casino
             return _players;
         }
 
-        public void AddPlayer(Player player)
+        public bool AddPlayer(Player player)
         {
             if (_players.Count < 6)
+            {
                 _players.Add(player);
+                return true;
+            }
+
+            return false;
         }
 
-        public void RemovePlayer(Player player)
+        public bool RemovePlayer(Player player)
         {
             if (_players.Contains(player))
+            {
                 _players.Remove(player);
+                return true;
+            }
+
+            return false;
         }
 
         public bool AcceptBet(int chipsAmount)

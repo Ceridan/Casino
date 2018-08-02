@@ -223,5 +223,31 @@ namespace Casino.Tests
 
             Assert.AreEqual(140, player.CurrentChips);
         }
+
+        [Test]
+        public void ShouldNotBeAbleToJoinTheGame_WhenGameAlreadyHaveSixPlayers()
+        {
+            var game = Create.GameBuilder
+                .WithSixJoinedPlayers()
+                .Build();
+            var player = new Player();
+
+            player.Join(game);
+
+            Assert.IsFalse(player.IsInGame);
+        }
+
+        [Test]
+        public void ShouldNotBeAbleToLeaveTheGame_WhenJoinedOtherGame()
+        {
+            var game1 = new Game();
+            var game2 = new Game();
+            var player = new Player();
+            player.Join(game1);
+
+            var isRejectedLeave = player.Leave(game2);
+
+            Assert.IsFalse(isRejectedLeave);
+        }
     }
 }
