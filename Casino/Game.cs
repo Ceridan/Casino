@@ -48,6 +48,12 @@ namespace Casino
                 _players.Add(player);
         }
 
+        public void RemovePlayer(Player player)
+        {
+            if (_players.Contains(player))
+                _players.Remove(player);
+        }
+
         public bool AcceptBet(int chipsAmount)
         {
             return chipsAmount % 5 == 0;

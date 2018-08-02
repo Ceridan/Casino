@@ -23,10 +23,11 @@ namespace Casino
             return true;
         }
 
-        public bool Leave()
+        public bool Leave(Game game)
         {
             if (IsInGame)
             {
+                game.RemovePlayer(this);
                 IsInGame = false;
                 return true;
             }

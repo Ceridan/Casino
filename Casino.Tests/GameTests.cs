@@ -79,5 +79,28 @@ namespace Casino.Tests
             Assert.AreEqual(6, modifierForNumber7);
             Assert.AreEqual(9, modifierForNumber9);
         }
+
+        [Test]
+        public void WhenPlayerJoinTheGame_ShouldIncreasePlayerCount()
+        {
+            var player = new Player();
+            var game = new Game();
+
+            player.Join(game);
+
+            Assert.AreEqual(1, game.GetJoinedPlayers().Count);
+        }
+
+        [Test]
+        public void WhenPlayerLeaveTheGame_ShouldDecreasePlayerCount()
+        {
+            var player = new Player();
+            var game = new Game();
+            player.Join(game);
+
+            player.Leave(game);
+
+            Assert.AreEqual(0, game.GetJoinedPlayers().Count);
+        }
     }
 }

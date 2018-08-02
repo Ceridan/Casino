@@ -22,8 +22,10 @@ namespace Casino.Tests
         public void ShouldBeNotInGame_WhenLeaveGame()
         {
             var player = new Player();
+            var game = new Game();
+            player.Join(game);
 
-            player.Leave();
+            player.Leave(game);
 
             Assert.IsFalse(player.IsInGame);
         }
@@ -32,8 +34,9 @@ namespace Casino.Tests
         public void ShouldNotBeAbleToLeaveGame_WhenNotInGame()
         {
             var player = new Player();
+            var game = new Game();
 
-            var isSuccessfullLeave = player.Leave();
+            var isSuccessfullLeave = player.Leave(game);
 
             Assert.IsFalse(isSuccessfullLeave);
         }
