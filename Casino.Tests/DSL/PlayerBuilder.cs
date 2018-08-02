@@ -22,6 +22,12 @@
             return this;
         }
 
+        public PlayerBuilder WithBetOnNumberWithAmount(int number, int chipsAmount)
+        {
+            _player.Bet(number: number, chipsAmount: chipsAmount);
+            return this;
+        }
+
         public Player Build()
         {
             return _player;
