@@ -30,9 +30,17 @@ namespace Casino.Tests
             var game = new Game();
 
             var acceptedBet = game.AcceptBet(15);
-            var rejectedBet = game.AcceptBet(17);
 
             Assert.IsTrue(acceptedBet);
+        }
+
+        [Test]
+        public void ShouldNotAcceptBetsThatNotDividedByFive()
+        {
+            var game = new Game();
+
+            var rejectedBet = game.AcceptBet(17);
+
             Assert.IsFalse(rejectedBet);
         }
     }
