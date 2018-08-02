@@ -165,5 +165,23 @@ namespace Casino.Tests
 
             Assert.AreEqual(150, player.CurrentChips);
         }
+
+        [Test]
+        public void ShouldBeAbleToWinOnlyBetsOnLuckyNumber_WhenMakeDifferentBets()
+        {
+            var game = Create.GameBuilder
+                .WithDiceWhichAlwaysDropsOne()
+                .Build();
+            var player = Create.PlayerBuilder
+                .WithChips(100)
+                .WithGame(game)
+                .WithBetOnNumberWithAmount(number: 1, chipsAmount: 10)
+                .WithBetOnNumberWithAmount(number: 2, chipsAmount: 10)
+                .Build();
+
+            game.Play();
+
+            Assert.AreEqual(140, player.CurrentChips);
+        }
     }
 }
