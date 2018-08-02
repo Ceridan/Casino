@@ -4,6 +4,8 @@ namespace Casino
 {
     public class Player
     {
+        private int diceCount = 1;
+
         public bool IsInGame { get; set; }
         public int CurrentChips { get; set; }
         public List<Bet> CurrentBets { get; } = new List<Bet>();
@@ -16,6 +18,7 @@ namespace Casino
             }
 
             game.AddPlayer(this);
+            diceCount = game.DiceCount;
             IsInGame = true;
             return true;
         }
@@ -38,7 +41,10 @@ namespace Casino
 
         public bool Bet(int number, int chipsAmount)
         {
-            if (number < 1 || number > 6)
+            if (!IsInGame)
+                return false;
+
+            if (number < 1 * diceCount || number > 6 * diceCount)
                 return false;
 
             if (chipsAmount > CurrentChips)

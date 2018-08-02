@@ -66,6 +66,7 @@ namespace Casino.Tests
         {
             var player = new Player();
             player.BuyChips(10);
+            player.Join(new Game());
 
             player.Bet(number: 5, chipsAmount: 10);
 
@@ -88,6 +89,7 @@ namespace Casino.Tests
         {
             var player = new Player();
             player.BuyChips(20);
+            player.Join(new Game());
 
             player.Bet(number: 5, chipsAmount: 10);
             player.Bet(number: 6, chipsAmount: 10);
@@ -97,10 +99,11 @@ namespace Casino.Tests
         }
 
         [Test]
-        public void ShouldBeAbleToBetOnNumbersFromOneToSix()
+        public void ShouldBeAbleToBetOnNumbersFromOneToSix_WhenGameHasOneDice()
         {
             var player = new Player();
             player.BuyChips(100);
+            player.Join(new Game(numberOfDices: 1));
 
             var isSuccessfulBet1 = player.Bet(number: 1, chipsAmount: 10);
             var isSuccessfulBet2 = player.Bet(number: 2, chipsAmount: 10);
@@ -118,14 +121,48 @@ namespace Casino.Tests
         }
 
         [Test]
-        public void ShouldNotBeAbleToBetOnNumbersOtherThanOneToSix()
+        public void ShouldNotBeAbleToBetOnNumbersOtherThanOneToSix_WhenGameHasOneDice()
         {
             var player = new Player();
             player.BuyChips(100);
+            player.Join(new Game(numberOfDices: 1));
 
             var isRejectedBet1 = player.Bet(number: -1, chipsAmount: 10);
             var isRejectedBet2 = player.Bet(number: 0, chipsAmount: 10);
             var isRejectedBet3 = player.Bet(number: 7, chipsAmount: 10);
+
+            Assert.IsFalse(isRejectedBet1);
+            Assert.IsFalse(isRejectedBet2);
+            Assert.IsFalse(isRejectedBet3);
+        }
+
+        [Test]
+        public void ShouldBeAbleToBetOnNumbersFromTwoToTwelve_WhenGameHasTwoDices()
+        {
+            var player = new Player();
+            player.BuyChips(100);
+            player.Join(new Game(numberOfDices: 2));
+
+            var isSuccessfulBet2 = player.Bet(number: 2, chipsAmount: 10);
+            var isSuccessfulBet7 = player.Bet(number: 7, chipsAmount: 10);
+            var isSuccessfulBet12 = player.Bet(number: 12, chipsAmount: 10);
+
+            Assert.IsTrue(isSuccessfulBet2);
+            Assert.IsTrue(isSuccessfulBet7);
+            Assert.IsTrue(isSuccessfulBet12);
+
+        }
+
+        [Test]
+        public void ShouldNotBeAbleToBetOnNumbersOtherThanTwoToTwelve_WhenGameHasTwoDices()
+        {
+            var player = new Player();
+            player.BuyChips(100);
+            player.Join(new Game(numberOfDices: 2));
+
+            var isRejectedBet1 = player.Bet(number: -1, chipsAmount: 10);
+            var isRejectedBet2 = player.Bet(number: 1, chipsAmount: 10);
+            var isRejectedBet3 = player.Bet(number: 13, chipsAmount: 10);
 
             Assert.IsFalse(isRejectedBet1);
             Assert.IsFalse(isRejectedBet2);
