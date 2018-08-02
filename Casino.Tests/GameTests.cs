@@ -40,5 +40,22 @@ namespace Casino.Tests
 
             Assert.IsFalse(rejectedBet);
         }
+
+        [Test]
+        public void ShouldClaimChipsFromPlayer_WhenPlayerMakeBetOnWrongNumber()
+        {
+            var game = Create.GameBuilder
+                .WithDiceWhichAlwaysDropsOne()
+                .Build();
+            Create.PlayerBuilder
+                .WithChips(100)
+                .WithGame(game)
+                .WithBetOnNumberWithAmount(number: 2, chipsAmount: 10)
+                .Build();
+
+            game.Play();
+
+            Assert.AreEqual(10, game.CasinoChips);
+        }
     }
 }

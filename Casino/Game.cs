@@ -17,6 +17,8 @@ namespace Casino
             _dice = dice;
         }
 
+        public int CasinoChips { get; set; }
+
         public List<Player> GetJoinedPlayers()
         {
             return _players;
@@ -44,6 +46,10 @@ namespace Casino
                     if (bet.Number == luckyNumber)
                     {
                         player.CurrentChips += bet.ChipsAmount * 6;
+                    }
+                    else
+                    {
+                        CasinoChips += bet.ChipsAmount;
                     }
                 }
 
