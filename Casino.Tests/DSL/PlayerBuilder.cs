@@ -22,12 +22,6 @@
             return this;
         }
 
-        public PlayerBuilder WithChips()
-        {
-            _player.BuyChips(100);
-            return this;
-        }
-
         public PlayerBuilder WithBetOnNumber(int number)
         {
             _player.Bet(number: number, chipsAmount: 10);

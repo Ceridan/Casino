@@ -69,7 +69,7 @@ namespace Casino.Tests
         public void ShouldBeAbleToMakeBet()
         {
             var player = Create.Player
-                .WithChips()
+                .WithChips(100)
                 .WithNewGame()
                 .Build();
 
@@ -81,8 +81,10 @@ namespace Casino.Tests
         [Test]
         public void ShouldNotBeAbleToBet_WhenBetMoreChipsThenHave()
         {
-            var player = new Player();
-            player.BuyChips(10);
+            var player = Create.Player
+                .WithNewGame()
+                .WithChips(10)
+                .Build();
 
             var isSuccessfulBet = player.Bet(number: 5, chipsAmount: 11);
 
