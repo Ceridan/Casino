@@ -17,6 +17,12 @@ namespace Casino.Tests.DSL
             return this;
         }
 
+        public GameBuilder WithPlayer(Player player)
+        {
+            _players.Add(player);
+            return this;
+        }
+
         public GameBuilder WithSixJoinedPlayers()
         {
             _players.AddRange(Enumerable.Range(0, 6).Select(s => new Player()));

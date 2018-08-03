@@ -91,13 +91,14 @@ namespace Casino.Tests
         }
 
         [Test]
-        public void WhenPlayerLeaveTheGame_ShouldDecreasePlayerCount()
+        public void ShouldDecreasePlayerCount_WhenPlayerLeaveTheGame()
         {
             var player = new Player();
-            var game = new Game();
-            player.Join(game);
+            var game = Create.Game
+                .WithPlayer(player)
+                .Build();
 
-            player.Leave(game);
+            game.RemovePlayer(player);
 
             Assert.AreEqual(0, game.GetJoinedPlayers().Count);
         }
