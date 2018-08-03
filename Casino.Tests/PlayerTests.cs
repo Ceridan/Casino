@@ -154,19 +154,18 @@ namespace Casino.Tests
         }
 
         [Test]
-        public void ShouldNotBeAbleToBetOnNumbersOtherThanTwoToTwelve_WhenGameHasTwoDices()
+        [TestCase(1)]
+        [TestCase(13)]
+        public void ShouldNotBeAbleToBetOnNumbersOtherThanTwoToTwelve_WhenGameHasTwoDices(int betNumber)
         {
-            var player = new Player();
-            player.BuyChips(100);
-            player.Join(new Game(numberOfDices: 2));
+            var player = Create.Player
+                .WithNewGameWithTwoDice()
+                .WithChips(100)
+                .Build();
 
-            var isRejectedBet1 = player.Bet(number: -1, chipsAmount: 10);
-            var isRejectedBet2 = player.Bet(number: 1, chipsAmount: 10);
-            var isRejectedBet3 = player.Bet(number: 13, chipsAmount: 10);
+            var isRejectedBet = player.Bet(number: betNumber, chipsAmount: 10);
 
-            Assert.IsFalse(isRejectedBet1);
-            Assert.IsFalse(isRejectedBet2);
-            Assert.IsFalse(isRejectedBet3);
+            Assert.IsFalse(isRejectedBet);
         }
 
         [Test]
