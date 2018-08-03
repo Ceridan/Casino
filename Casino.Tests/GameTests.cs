@@ -67,17 +67,16 @@ namespace Casino.Tests
         }
 
         [Test]
-        public void ShouldDecideWinningModifierBasedOnLuckyNumber_WhenGameWithTwoDices()
+        [TestCase(2, 36)]
+        [TestCase(7, 6)]
+        [TestCase(9, 9)]
+        public void ShouldDecideWinningModifierBasedOnLuckyNumber_WhenGameWithTwoDices(int number, int modifier)
         {
             var game = new Game(numberOfDices: 2);
 
-            var modifierForNumber2 = game.GetWinningModifier(winningNumber: 2);
-            var modifierForNumber7 = game.GetWinningModifier(winningNumber: 7);
-            var modifierForNumber9 = game.GetWinningModifier(winningNumber: 9);
+            var modifierForNumber = game.GetWinningModifier(winningNumber: number);
 
-            Assert.AreEqual(36, modifierForNumber2);
-            Assert.AreEqual(6, modifierForNumber7);
-            Assert.AreEqual(9, modifierForNumber9);
+            Assert.AreEqual(modifier, modifierForNumber);
         }
 
         [Test]
