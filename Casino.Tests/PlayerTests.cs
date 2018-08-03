@@ -56,6 +56,32 @@ namespace Casino.Tests
         }
 
         [Test]
+        public void ShouldNotBeAbleToLeaveTheGame_WhenJoinedOtherGame()
+        {
+            var player = Create.Player
+                .WithNewGame()
+                .Build();
+            var secondGame = new Game();
+
+            var isRejectedLeave = player.Leave(secondGame);
+
+            Assert.IsFalse(isRejectedLeave);
+        }
+
+        [Test]
+        public void ShouldNotBeAbleToJoinTheGame_WhenGameAlreadyHaveSixPlayers()
+        {
+            var game = Create.Game
+                .WithSixJoinedPlayers()
+                .Build();
+            var player = new Player();
+
+            player.Join(game);
+
+            Assert.IsFalse(player.IsInGame);
+        }
+
+        [Test]
         public void ShouldBeAbleToBuyChips()
         {
             var player = new Player();
@@ -218,32 +244,6 @@ namespace Casino.Tests
             game.Play();
 
             Assert.AreEqual(140, player.CurrentChips);
-        }
-
-        [Test]
-        public void ShouldNotBeAbleToJoinTheGame_WhenGameAlreadyHaveSixPlayers()
-        {
-            var game = Create.Game
-                .WithSixJoinedPlayers()
-                .Build();
-            var player = new Player();
-
-            player.Join(game);
-
-            Assert.IsFalse(player.IsInGame);
-        }
-
-        [Test]
-        public void ShouldNotBeAbleToLeaveTheGame_WhenJoinedOtherGame()
-        {
-            var game1 = new Game();
-            var game2 = new Game();
-            var player = new Player();
-            player.Join(game1);
-
-            var isRejectedLeave = player.Leave(game2);
-
-            Assert.IsFalse(isRejectedLeave);
         }
     }
 }
