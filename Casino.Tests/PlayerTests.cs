@@ -21,9 +21,10 @@ namespace Casino.Tests
         [Test]
         public void ShouldBeNotInGame_WhenLeaveGame()
         {
-            var player = new Player();
             var game = new Game();
-            player.Join(game);
+            var player = Create.Player
+                .WithGame(game)
+                .Build();
 
             player.Leave(game);
 
