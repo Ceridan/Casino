@@ -123,19 +123,18 @@ namespace Casino.Tests
         }
 
         [Test]
-        public void ShouldNotBeAbleToBetOnNumbersOtherThanOneToSix_WhenGameHasOneDice()
+        [TestCase(0)]
+        [TestCase(7)]
+        public void ShouldNotBeAbleToBetOnNumbersOtherThanOneToSix_WhenGameHasOneDice(int betNumber)
         {
-            var player = new Player();
-            player.BuyChips(100);
-            player.Join(new Game(numberOfDices: 1));
+            var player = Create.Player
+                .WithNewGameWithOneDice()
+                .WithChips(100)
+                .Build();
 
-            var isRejectedBet1 = player.Bet(number: -1, chipsAmount: 10);
-            var isRejectedBet2 = player.Bet(number: 0, chipsAmount: 10);
-            var isRejectedBet3 = player.Bet(number: 7, chipsAmount: 10);
+            var isSuccessfulBet = player.Bet(number: betNumber, chipsAmount: 10);
 
-            Assert.IsFalse(isRejectedBet1);
-            Assert.IsFalse(isRejectedBet2);
-            Assert.IsFalse(isRejectedBet3);
+            Assert.IsFalse(isSuccessfulBet);
         }
 
         [Test]
