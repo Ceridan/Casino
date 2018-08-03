@@ -1,4 +1,6 @@
-﻿using Casino.Tests.DSL;
+﻿using System;
+using System.Linq;
+using Casino.Tests.DSL;
 using Moq;
 using NUnit.Framework;
 
@@ -128,8 +130,7 @@ namespace Casino.Tests
             player.Bet(number: 5, chipsAmount: 10);
             player.Bet(number: 6, chipsAmount: 10);
 
-            Assert.AreEqual(5, player.CurrentBets[0].Number);
-            Assert.AreEqual(6, player.CurrentBets[1].Number);
+            AssertCurrentBets.AreEqual(new [] { 5, 6 }, player.CurrentBets);
         }
 
         [Test]
