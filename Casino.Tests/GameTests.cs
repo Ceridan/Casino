@@ -14,8 +14,8 @@ namespace Casino.Tests
                 .WithSixJoinedPlayers()
                 .Build();
             var declinedPlayer = new Player();
-            declinedPlayer.Join(game);
 
+            declinedPlayer.Join(game);
             var playersCount = game.GetJoinedPlayers().Count;
 
             Assert.AreEqual(6, playersCount);
@@ -47,12 +47,12 @@ namespace Casino.Tests
             var game = Create.Game
                 .WithDiceWhichAlwaysDropsOne()
                 .Build();
-            Create.Player
+            var player = Create.Player
                 .WithChips(100)
                 .WithGame(game)
-                .WithBetOnNumberWithAmount(number: 2, chipsAmount: 10)
                 .Build();
 
+            player.Bet(number: 2, chipsAmount: 10);
             game.Play();
 
             Assert.AreEqual(10, game.CasinoChips);
