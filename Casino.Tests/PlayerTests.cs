@@ -107,25 +107,19 @@ namespace Casino.Tests
         }
 
         [Test]
-        public void ShouldBeAbleToBetOnNumbersFromOneToSix_WhenGameHasOneDice()
+        [TestCase(1)]
+        [TestCase(3)]
+        [TestCase(6)]
+        public void ShouldBeAbleToBetOnNumbersFromOneToSix_WhenGameHasOneDice(int betNumber)
         {
-            var player = new Player();
-            player.BuyChips(100);
-            player.Join(new Game(numberOfDices: 1));
+            var player = Create.Player
+                .WithNewGameWithOneDice()
+                .WithChips(100)
+                .Build();
 
-            var isSuccessfulBet1 = player.Bet(number: 1, chipsAmount: 10);
-            var isSuccessfulBet2 = player.Bet(number: 2, chipsAmount: 10);
-            var isSuccessfulBet3 = player.Bet(number: 3, chipsAmount: 10);
-            var isSuccessfulBet4 = player.Bet(number: 4, chipsAmount: 10);
-            var isSuccessfulBet5 = player.Bet(number: 5, chipsAmount: 10);
-            var isSuccessfulBet6 = player.Bet(number: 6, chipsAmount: 10);
+            var isSuccessfulBet = player.Bet(number: betNumber, chipsAmount: 10);
 
-            Assert.IsTrue(isSuccessfulBet1);
-            Assert.IsTrue(isSuccessfulBet2);
-            Assert.IsTrue(isSuccessfulBet3);
-            Assert.IsTrue(isSuccessfulBet4);
-            Assert.IsTrue(isSuccessfulBet5);
-            Assert.IsTrue(isSuccessfulBet6);
+            Assert.IsTrue(isSuccessfulBet);
         }
 
         [Test]
