@@ -5,10 +5,12 @@ namespace Casino
     public class Player
     {
         private int diceCount = 1;
+        private readonly List<Bet> _currentBets = new List<Bet>();
 
         public bool IsInGame { get; set; }
         public int CurrentChips { get; set; }
-        public List<Bet> CurrentBets { get; } = new List<Bet>();
+
+        public IReadOnlyList<Bet> CurrentBets => _currentBets;
 
         public bool Join(Game game)
         {
@@ -25,6 +27,11 @@ namespace Casino
             }
 
             return false;
+        }
+
+        public void ClearBets()
+        {
+            _currentBets.Clear();
         }
 
         public bool Leave(Game game)
@@ -54,7 +61,7 @@ namespace Casino
             if (chipsAmount > CurrentChips)
                 return false;
 
-            CurrentBets.Add(new Bet { Number = number, ChipsAmount = chipsAmount });
+            _currentBets.Add(new Bet { Number = number, ChipsAmount = chipsAmount });
             CurrentChips -= chipsAmount;
             return true;
         }

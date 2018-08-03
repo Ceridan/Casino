@@ -87,7 +87,7 @@ namespace Casino
                     }
                 }
 
-                player.CurrentBets.Clear();
+                player.ClearBets();
             }
         }
 
