@@ -68,9 +68,10 @@ namespace Casino.Tests
         [Test]
         public void ShouldBeAbleToMakeBet()
         {
-            var player = new Player();
-            player.BuyChips(10);
-            player.Join(new Game());
+            var player = Create.Player
+                .WithChips()
+                .WithNewGame()
+                .Build();
 
             player.Bet(number: 5, chipsAmount: 10);
 
