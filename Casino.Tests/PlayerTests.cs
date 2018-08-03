@@ -94,9 +94,10 @@ namespace Casino.Tests
         [Test]
         public void ShouldBeAbleToBetSeveralTimesOnDifferentNumbers()
         {
-            var player = new Player();
-            player.BuyChips(20);
-            player.Join(new Game());
+            var player = Create.Player
+                .WithNewGame()
+                .WithChips(20)
+                .Build();
 
             player.Bet(number: 5, chipsAmount: 10);
             player.Bet(number: 6, chipsAmount: 10);
