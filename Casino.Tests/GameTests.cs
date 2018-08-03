@@ -80,12 +80,12 @@ namespace Casino.Tests
         }
 
         [Test]
-        public void WhenPlayerJoinTheGame_ShouldIncreasePlayerCount()
+        public void ShouldIncreasePlayerCount_WhenPlayerJoinTheGame()
         {
-            var player = new Player();
             var game = new Game();
+            var player = new Player();
 
-            player.Join(game);
+            game.AddPlayer(player);
 
             Assert.AreEqual(1, game.GetJoinedPlayers().Count);
         }
