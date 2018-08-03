@@ -10,7 +10,7 @@ namespace Casino.Tests
         [Test]
         public void ShouldDeclineSeventhPlayer_WhenSixPlayersAlreadyJoined()
         {
-            var game = Create.GameBuilder
+            var game = Create.Game
                 .WithSixJoinedPlayers()
                 .Build();
             var declinedPlayer = new Player();
@@ -44,10 +44,10 @@ namespace Casino.Tests
         [Test]
         public void ShouldClaimChipsFromPlayer_WhenPlayerMakeBetOnWrongNumber()
         {
-            var game = Create.GameBuilder
+            var game = Create.Game
                 .WithDiceWhichAlwaysDropsOne()
                 .Build();
-            Create.PlayerBuilder
+            Create.Player
                 .WithChips(100)
                 .WithGame(game)
                 .WithBetOnNumberWithAmount(number: 2, chipsAmount: 10)

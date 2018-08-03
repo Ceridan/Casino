@@ -2,7 +2,7 @@
 {
     public static class Create
     {
-        public static GameBuilder GameBuilder => new GameBuilder();
-        public static PlayerBuilder PlayerBuilder => new PlayerBuilder();
+        public static GameBuilder Game => new GameBuilder();
+        public static PlayerBuilder Player => new PlayerBuilder();
     }
 }

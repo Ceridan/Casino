@@ -175,10 +175,10 @@ namespace Casino.Tests
         [Test]
         public void ShouldLoseTheGame_WhenWrongBet()
         {
-            var game = Create.GameBuilder
+            var game = Create.Game
                 .WithDiceWhichAlwaysDropsOne()
                 .Build();
-            var player = Create.PlayerBuilder
+            var player = Create.Player
                 .WithChips(100)
                 .WithGame(game)
                 .WithBetOnNumber(2)
@@ -192,10 +192,10 @@ namespace Casino.Tests
         [Test]
         public void ShouldBeAbleToWinSixBets_WhenMakeBetOnLuckyNumber()
         {
-            var game = Create.GameBuilder
+            var game = Create.Game
                 .WithDiceWhichAlwaysDropsOne()
                 .Build();
-            var player = Create.PlayerBuilder
+            var player = Create.Player
                 .WithChips(100)
                 .WithGame(game)
                 .WithBetOnNumberWithAmount(number: 1, chipsAmount: 10)
@@ -209,10 +209,10 @@ namespace Casino.Tests
         [Test]
         public void ShouldBeAbleToWinOnlyBetsOnLuckyNumber_WhenMakeDifferentBets()
         {
-            var game = Create.GameBuilder
+            var game = Create.Game
                 .WithDiceWhichAlwaysDropsOne()
                 .Build();
-            var player = Create.PlayerBuilder
+            var player = Create.Player
                 .WithChips(100)
                 .WithGame(game)
                 .WithBetOnNumberWithAmount(number: 1, chipsAmount: 10)
@@ -227,7 +227,7 @@ namespace Casino.Tests
         [Test]
         public void ShouldNotBeAbleToJoinTheGame_WhenGameAlreadyHaveSixPlayers()
         {
-            var game = Create.GameBuilder
+            var game = Create.Game
                 .WithSixJoinedPlayers()
                 .Build();
             var player = new Player();
