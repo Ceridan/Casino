@@ -45,12 +45,12 @@ namespace Casino.Tests
         [Test]
         public void ShouldNotBeAbleToJoinGame_WhenInGame()
         {
-            var player = new Player();
-            var game1 = new Game();
-            var game2 = new Game();
+            var player = Create.Player
+                .WithNewGame()
+                .Build();
+            var secondGame = new Game();
 
-            player.Join(game1);
-            var isSuccessfulSecondJoin = player.Join(game2);
+            var isSuccessfulSecondJoin = player.Join(secondGame);
 
             Assert.IsFalse(isSuccessfulSecondJoin);
         }

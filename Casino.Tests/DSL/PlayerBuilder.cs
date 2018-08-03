@@ -16,6 +16,12 @@
             return this;
         }
 
+        public PlayerBuilder WithNewGame()
+        {
+            _player.Join(new Game());
+            return this;
+        }
+
         public PlayerBuilder WithBetOnNumber(int number)
         {
             _player.Bet(number: number, chipsAmount: 10);
