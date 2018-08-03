@@ -28,6 +28,12 @@
             return this;
         }
 
+        public PlayerBuilder WithNewGameWithTwoDice()
+        {
+            _player.Join(new Game(numberOfDices: 2));
+            return this;
+        }
+
         public PlayerBuilder WithBetOnNumber(int number)
         {
             _player.Bet(number: number, chipsAmount: 10);

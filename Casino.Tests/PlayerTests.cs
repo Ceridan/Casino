@@ -138,20 +138,19 @@ namespace Casino.Tests
         }
 
         [Test]
-        public void ShouldBeAbleToBetOnNumbersFromTwoToTwelve_WhenGameHasTwoDices()
+        [TestCase(2)]
+        [TestCase(7)]
+        [TestCase(12)]
+        public void ShouldBeAbleToBetOnNumbersFromTwoToTwelve_WhenGameHasTwoDices(int betNumber)
         {
-            var player = new Player();
-            player.BuyChips(100);
-            player.Join(new Game(numberOfDices: 2));
+            var player = Create.Player
+                .WithNewGameWithTwoDice()
+                .WithChips(100)
+                .Build();
 
-            var isSuccessfulBet2 = player.Bet(number: 2, chipsAmount: 10);
-            var isSuccessfulBet7 = player.Bet(number: 7, chipsAmount: 10);
-            var isSuccessfulBet12 = player.Bet(number: 12, chipsAmount: 10);
+            var isSuccessfulBet = player.Bet(number: betNumber, chipsAmount: 10);
 
-            Assert.IsTrue(isSuccessfulBet2);
-            Assert.IsTrue(isSuccessfulBet7);
-            Assert.IsTrue(isSuccessfulBet12);
-
+            Assert.IsTrue(isSuccessfulBet);
         }
 
         [Test]
