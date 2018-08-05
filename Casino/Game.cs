@@ -37,7 +37,7 @@ namespace Casino
         public int CasinoChips { get; set; }
         public int DiceCount { get; }
 
-        public List<Player> GetJoinedPlayers()
+        public IReadOnlyList<Player> GetJoinedPlayers()
         {
             return _players;
         }
